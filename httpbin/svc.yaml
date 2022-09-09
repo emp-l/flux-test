@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: httpbin-svc
+  namespace: httpbin
+  labels:
+    component: httpbin
+    app: httpbin
+spec:
+  ports:
+    - name: client
+      protocol: TCP
+      port: 80
+      targetPort: server
+  selector:
+    component: httpbin
+    app: httpbin

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpbin
+  namespace: httpbin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpbin
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: httpbin
+        version: v1
+    spec:
+      serviceAccountName: httpbin
+      containers:
+      - image: docker.io/kennethreitz/httpbin
+        name: httpbin
+        resources:
+          requests:
+            cpu: 100Mi
+            memory: 50MB
+          limits:
+            cpu: 200Mi
+            memory: 100MB
+        ports:
+          - name: server
+            containerPort: 80
